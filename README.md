@@ -233,6 +233,13 @@ This project is designed such that one could puzzle together how to implement th
 
 When our test failures leave us confused and stuck, let's use the detailed project requirements below.
 
+### Implementation Restrictions
+
+To focus on strengthening Python fundamentals, for this project: 
+- Do not import any modules to complete this work
+- Do not use built-in global functions such as min, max, sum, etc
+  - Folks are welcome to implement their own versions of any of these functions and then use them!
+
 ### Wave 1
 
 1. Create a function named  `create_movie`. This function and all subsequent functions should be in `party.py`. `create_movie` should...
