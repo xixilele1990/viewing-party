@@ -1,6 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+
     if not title or not genre or not rating:
         return None
     return {
@@ -23,8 +24,10 @@ def watch_movie(user_data, title):
         if movie["title"] == title:
             user_data["watchlist"].remove(movie)
             user_data["watched"].append(movie)
-            break
+            break # this is necessary since we are looping over a changing list
     return user_data
+
+
 
 
 # -----------------------------------------
