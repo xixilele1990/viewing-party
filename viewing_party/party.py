@@ -71,6 +71,8 @@ def get_most_watched_genre(user_data):
 
 
     return max_watched_genre
+
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
@@ -121,8 +123,75 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    
+    user_watched = user_data["watched"]
+    subscriptions = user_data["subscriptions"]
+    
+    friend_watched =[]
+    
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friend_watched:
+                friend_watched.append(movie)
+                
+    recs = []
+    for movie in friend_watched:
+       
+        if movie in user_watched:
+            continue
+
+       
+        if movie["host"] not in subscriptions:
+            continue
+
+       
+        recs.append(movie)
+    return recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    most_watched_genre = get_most_watched_genre(user_data)
+
+    if most_watched_genre is None:
+        return []
+    
+    friends_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_watched:
+                friends_watched.append(movie)
+
+    
+    recs = []
+    for movie in friends_watched:
+        if movie in user_data["watched"]:
+            continue 
+        if movie["genre"] != most_watched_genre:
+            continue  
+        recs.append(movie)
+
+    return recs
+
+
+def get_rec_from_favorites(user_data):
+
+    favorites = user_data.get("favorites", [])
+
+ 
+    friends_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_watched:
+                friends_watched.append(movie)
+
+  
+    recs = []
+    for movie in favorites:
+        if movie not in friends_watched:
+            recs.append(movie)
+
+    return recs
 
